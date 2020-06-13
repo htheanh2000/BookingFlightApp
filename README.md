@@ -71,6 +71,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 I>> Giới thiệu đồ án
 Booking Flight là một web app đươc xây dựng và thiết kế để hỗ trợ khách hàng trong việc mua vé máy bay online, giảm thiểu thời gian di chuyển tới các đại lý. Ngoài ra booking flight sẽ có những trang dành cho quản trị viên để dễ dàng thực hiện công tác quản lý và giám sát hệ thống.
+
 II>> Công nghệ sử dụng.
 1. Git
 Nhóm sử dụng git để hỗ trợ quản lý soucre code và tăng khả năng làm việc nhóm. Ngoài ra thì lý do nhóm chọn Git bởi vì nó rất phổ biến và được nhiều công ty yêu cầu sử dụng trong các dự án hiện nay và tương lai.
