@@ -74,6 +74,7 @@ Booking Flight là một web app đươc xây dựng và thiết kế để hỗ
 
 II>> Công nghệ sử dụng.
 1. Git
+
 Nhóm sử dụng git để hỗ trợ quản lý soucre code và tăng khả năng làm việc nhóm. Ngoài ra thì lý do nhóm chọn Git bởi vì nó rất phổ biến và được nhiều công ty yêu cầu sử dụng trong các dự án hiện nay và tương lai.
 2. Font-end
   - Thiết kế giao diện. Nhóm sẽ sử dụng AdobeXd hoặc Figma để thiết kế UI/UX
