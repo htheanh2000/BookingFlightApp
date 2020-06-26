@@ -17,20 +17,20 @@ export default class Ticket extends Component {
     componentDidMount() {
       let url = this.props.location.search;
       let params = queryString.parse(url);
-      console.log(params);
+      //console.log(params);
       const flight = {
         arrivalDate: params.date,
         arrivalLocation: params.origin,
         departureLocation: params.destination
-
       }
+      console.log(flight)
       axios.post('http://localhost:5000/flights/search/filterticket', flight )
       .then((res)=> {
         
         this.setState({
           ticketlist: res.data
         })
-        console.log(this.state.ticketlist)
+       console.log(res.data, "????")
       })
     }
 

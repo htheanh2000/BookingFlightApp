@@ -39,7 +39,7 @@ router.route('/add').post((req,res) => {
 
 router.route('/search/filterticket/').post((req,res)=>{
     Flight.find(
-        {arrivalDate:  req.body.arrivalDate ,
+        {arrivalDate:  req.body.arrivalDate.toString() ,
          arrivalLocation :req.body.arrivalLocation,
          departureLocation: req.body.departureLocation,
     }
