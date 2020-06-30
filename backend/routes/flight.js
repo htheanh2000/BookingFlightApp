@@ -14,35 +14,39 @@ router.route('/:id').get((req,res)=> {
 }) 
 
 router.route('/add').post((req,res) => {
-    const flightID = req.body.flightID;
-    const flightName = req.body.flightName;
-    const departureDate = Date.parse(req.body.departureDate);
-    const arrivalDate = Date.parse(req.body.arrivalDate);
-    const arrivalLocation = req.body.arrivalLocation;
-    const departureLocation = req.body.departureLocation;
-    const airfares = Number(req.body.airfares);
+   
+        const flightID = req.body.flightID;
+        const flightName = req.body.flightName;
+        const departureDate = Date.parse(req.body.departureDate);
+        const flightTime = Number(req.body.flightTime);
+        const arrivalLocation = req.body.arrivalLocation;
+        const departureLocation = req.body.departureLocation;
+        const airfares = Number(req.body.airfares);
+        
+        const newFlight = new Flight({
+            flightID,
+            flightName,
+            departureDate,
+            flightTime,
+            arrivalLocation,
+            departureLocation,
+            airfares,
+        });
     
-    const newFlight = new Flight({
-        flightID,
-        flightName,
-        departureDate,
-        arrivalDate,
-        arrivalLocation,
-        departureLocation,
-        airfares,
-    });
+        newFlight.save()
+        .then(() => res.json('Flight added'))
+        .catch(err => res.status(400).json('Error: ' + err))
+    })
+   
 
-    newFlight.save()
-    .then(() => res.json('Flight added'))
-    .catch(err => res.status(400).json('Error: ' + err))
-})
 
-router.route('/search/filterticket/').post((req,res)=>{
+router.route('/search').post((req,res)=>{
     Flight.find(
-        {arrivalDate:  req.body.arrivalDate.toString() ,
+        {
+         departureDate: req.body.departureDate.toString() ,
          arrivalLocation :req.body.arrivalLocation,
          departureLocation: req.body.departureLocation,
-    }
+        }
     )
    .then( flight => res.json(flight))
    .catch(err => res.status(400).json('Error: ' + err))

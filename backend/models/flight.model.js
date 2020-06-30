@@ -18,8 +18,8 @@ let flighSchema = new Schema({
         required: true
     },
     // Ngày tới | Arrival date 
-    arrivalDate: {
-        type: Date,
+    flightTime: {
+        type: Number,
         required: true
     },
     // Nơi đến | arrivalLocation

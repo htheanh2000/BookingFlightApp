@@ -19,12 +19,12 @@ export default class Ticket extends Component {
       let params = queryString.parse(url);
       //console.log(params);
       const flight = {
-        arrivalDate: params.date,
+        departureDate: params.date,
         arrivalLocation: params.origin,
         departureLocation: params.destination
       }
       console.log(flight)
-      axios.post('http://localhost:5000/flights/search/filterticket', flight )
+      axios.post('http://localhost:5000/flights/search', flight )
       .then((res)=> {
         
         this.setState({
@@ -43,7 +43,7 @@ export default class Ticket extends Component {
                   <h5>Name: {item.flightName} </h5>
                   <br></br>
                   <div>
-                    <span>{item.arrivalDate.substring(0,10)} </span>
+                    <span>{item.departureDate.substring(0,10)} </span>
                     <img src="https://img.icons8.com/officel/16/000000/airplane-mode-on.png"/>
                     <span><strong>{item.arrivalLocation}</strong></span>
                   </div>
