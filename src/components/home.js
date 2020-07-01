@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import Data from '../data.json';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './style.css';
-import { Link, useLocation } from 'react-router-dom';
-import DayPicker from 'react-day-picker';
+import { Link } from 'react-router-dom';
+import "react-datepicker/dist/react-datepicker.css";
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import { months } from 'moment';
 
+import MomentLocaleUtils, {
+    formatDate,
+    parseDate,
+} from 'react-day-picker/moment';
+
+import 'moment/locale/it';
 
 
 export default class Home extends Component {
@@ -18,12 +23,13 @@ export default class Home extends Component {
         this.onChangeOrigin = this.onChangeOrigin.bind(this);
         this.onChangeDestination = this.onChangeDestination.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleDayClick = this.handleDayClick.bind(this);
+
+        this.handleDayChange = this.handleDayChange.bind(this);
         this.state = {
             origin: 'Ha Noi',
             destination: 'Ho Chi Minh',
             date: new Date,
-            selectedDay: String,
+            selectedDay: '',
         }
     }
 
@@ -41,40 +47,53 @@ export default class Home extends Component {
     onChangeDate(day) {
         this.setState({
             date: day.toLocaleDateString(),
-        },() => console.log(this.state.date))
+        }, () => console.log(this.state.date))
     }
     onSubmit(e) {
         e.preventDefault();
 
     }
-    handleDayClick(day, { selected }) {
-        let d , m;
-        if(parseInt(day.getDate()) < 10){
-            d = "0" + day.getDate()
-        }
-        else(
-            d = day.getDate()
-        )
 
-        if(parseInt(day.getMonth()+1) < 10){
-            m = "0" + (day.getMonth()+1)
-        }
-        else(
-            m = day.getMonth()
-        )
-
-        let date= day.getFullYear() + "-"+ m +"-"+ d;
-
+    handleDayChange(selectedDay, modifiers, dayPickerInput) {
+        const input = dayPickerInput.getInput();
         this.setState({
-            selectedDay: date,
-        },()=> {console.log(this.state.selectedDay)});
+            selectedDay,
+            isEmpty: !input.value.trim(),
+            isValidDay: typeof selectedDay !== 'undefined',
+            isDisabled: modifiers.disabled === true,
+        });
+
+        let day = selectedDay;
+        let d, m;
+        if(day === undefined ){}
+        else {
+            if (parseInt(day.getDate()) < 10) {
+                d = "0" + day.getDate()
+            }
+            else (
+                d = day.getDate()
+            )
+    
+            if (parseInt(day.getMonth() + 1) < 10) {
+                m = "0" + (day.getMonth() + 1)
+            }
+            else (
+                m = day.getMonth() + 1
+            )
+    
+            let date = day.getFullYear() + "-" + m + "-" + d;
+    
+            this.setState({
+                selectedDay: date,
+            }, () => { console.log(this.state.selectedDay) });
+        }
        
-        
     }
+
     render() {
         return (
             <div>
-               
+
                 <form className="home-form">
                     <div className="form-group">
 
@@ -103,15 +122,20 @@ export default class Home extends Component {
                     <div className="form-group">
                         <label className="label-form">Date: </label>
                         <div>
-                        <DayPicker
-            
-                         onDayClick={this.handleDayClick}/>;
+                            <DayPickerInput
+                                formatDate={formatDate}
+                                parseDate={parseDate}
+                                placeholder={`${formatDate(new Date())}`}
+                                onDayChange={this.handleDayChange}
+                                selectedDay={this.state.selectedDay}
+                               
+                            />
                         </div>
                     </div>
-                    {/* <button className="btn btn-secondary btn-search"> */}
-                        <Link className="btn btn-secondary btn-search" to={"/search?origin=" + this.state.origin + "&destination=" +
-                            this.state.destination + "&date=" + this.state.selectedDay }>Search</Link>
-                {/* </button> */}
+
+                    <Link className="btn btn-secondary btn-search" to={"/search?origin=" + this.state.origin + "&destination=" +
+                        this.state.destination + "&date=" + this.state.selectedDay}>Search</Link>
+
                 </form>
 
             </div>

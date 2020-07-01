@@ -5,7 +5,7 @@ let userSchema = new Schema({
    userID: {
        type: String,
        required: true,
-       unique: true,
+      //     unique: true,
    },
    userName: {
        type: String,

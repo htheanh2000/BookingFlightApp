@@ -16,8 +16,8 @@ router.route('/add').post((req,res) => {
     const userID = req.body.userID;
     const userName = req.body.userName;
     const userEmail = req.body.userEmail;
-    const userBday = Day.parse(req.body.userBday);
-    const userPhoneNum = Day.parse(req.body.userPhoneNum);    
+    const userBday = Date.parse(req.body.userBday);
+    const userPhoneNum = req.body.userPhoneNum;    
 
     const newUser = new User({
         userID,

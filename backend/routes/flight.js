@@ -43,9 +43,10 @@ router.route('/add').post((req,res) => {
 router.route('/search').post((req,res)=>{
     Flight.find(
         {
-         departureDate: req.body.departureDate.toString() ,
+         departureDate:  req.body.departureDate.toString() ,
          arrivalLocation :req.body.arrivalLocation,
          departureLocation: req.body.departureLocation,
+         //slot : {$lte: 10}
         }
     )
    .then( flight => res.json(flight))
@@ -53,5 +54,9 @@ router.route('/search').post((req,res)=>{
 
    
 })
-
+router.route('/update/:id').post((req,res)=> {
+    Flight.findByIdAndUpdate(req.params.id,{ slot: Number(req.body.slot) })
+    .then( () => res.json("Update sucessfull"))
+    .catch(err => res.status(400).json('Error: ' + err))
+})
 module.exports = router;

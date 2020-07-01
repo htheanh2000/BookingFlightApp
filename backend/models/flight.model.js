@@ -32,10 +32,14 @@ let flighSchema = new Schema({
         type: String,
         required: true,
     },
-    // Gía vé | Airfares
+    // Giá | Airfares
     airfares: {
         type: Number,
         required: true,
+    },
+    slot: {
+        type: Number,
+        required: true
     }
 })
 

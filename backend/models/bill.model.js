@@ -13,10 +13,14 @@ let billSchema = new Schema({
     },
     billCost: {
         type: Number,
-        required: true,
+        required: true
     },
-    dPurchase
+    dPurchase: {
+        type: Date,
+        required:true
+    }
 })
 
 const Bill = mongoose.model('bill', billSchema);
-Module.export = Bill;
+
+module.exports = Bill;

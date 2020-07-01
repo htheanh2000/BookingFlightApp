@@ -2,12 +2,21 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let detailSchema = new Schema({
+    detailID: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     billID: {
         type: String,
         required: true,
         unique: true,
     },
-    userID: {
+    flightID: {
+        type: String,
+        required: true
+    },
+    num:{
         type: String,
         required: true
     },
@@ -18,4 +27,4 @@ let detailSchema = new Schema({
 })
 
 const Detail = mongoose.model('detail', detailSchema);
-Module.export = Detail;
+module.exports = Detail;
